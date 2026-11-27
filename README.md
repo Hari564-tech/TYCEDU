@@ -58,7 +58,7 @@ SUPABASE_URL="..." SUPABASE_SERVICE_ROLE_KEY="..." npm run seed:curriculum
 5. Provision teacher/admin roles through a trusted administrator. The browser cannot promote a profile to teacher/admin.
 6. Set up school/classroom membership through a protected staff workflow before enabling shared analytics.
 
-The application does not currently create student accounts or join classrooms. This is intentional until school onboarding, guardian/school consent and child-data handling have been agreed.
+Teacher email magic-link sign-in is available after Supabase is configured; a trusted administrator must provision teacher/admin roles. The application does not currently create student accounts or join classrooms. This is intentional until school onboarding, guardian/school consent and child-data handling have been agreed.
 
 ## Curriculum source, copyright and content status
 
