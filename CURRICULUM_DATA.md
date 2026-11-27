@@ -9,7 +9,7 @@
 
 The portal currently exposes a 2024–25 bilingual textbook listing and title-wise books. The repository catalogue preserves the official book titles/file names and links back to the government portal. Urdu-labelled book entries are included where the government portal lists them for the grade and subject. The availability of a particular medium varies by book; the app must not imply every title exists in every medium.
 
-## What is in the application
+## What is in the application\n\nThe catalogue seed contains **87 book-listing records** across Classes 6–10. These are metadata records, not 87 extracted chapters.
 
 - Classes 6, 7, 8, 9 and 10.
 - Official book listing metadata for the subjects and media visible in the government catalogue.
