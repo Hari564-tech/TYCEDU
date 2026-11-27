@@ -62,14 +62,15 @@ function voice(){
 function speak(){if(!("speechSynthesis"in window)){toast("Speech playback is unavailable.");return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance($("answerText").textContent);u.lang=profile.voice;u.rate=.9;speechSynthesis.speak(u)}
 function startQuiz(){
  const pool=PRACTICE.filter(q=>q.grade===profile.grade);quiz=pool[Math.floor(Math.random()*pool.length)]||PRACTICE[Math.floor(Math.random()*PRACTICE.length)];answered=false;
- $("practicePanel").classList.remove("hidden");$("quizTitle").textContent=quiz.subject+" · Class "+quiz.grade;$("quizCount").textContent="01 / 01";$("quizQuestion").textContent=quiz.q;$("quizOptions").innerHTML=quiz.opts.map(o=>`<button class="quiz-option" data-option="${esc(o)}">${esc(o)}</button>`).join("");
- $("quizOptions").querySelectorAll("button").forEach(b=>b.onclick=()=>check(b.dataset.option));$("quizFeedback").classList.add("hidden");$("nextQuiz").classList.add("hidden");$("practicePanel").scrollIntoView({behavior:"smooth"});
+ const lang=profile.medium,q=quiz.q[lang]||quiz.q.en,opts=quiz.opts[lang]||quiz.opts.en;
+ $("practicePanel").classList.remove("hidden");$("quizTitle").textContent=quiz.subject+" · Class "+quiz.grade;$("quizCount").textContent="01 / 01";$("quizQuestion").textContent=q;$("quizOptions").innerHTML=opts.map((o,i)=>'<button class="quiz-option" data-option="'+i+'">'+esc(o)+'</button>').join("");
+ $("quizOptions").querySelectorAll("button").forEach(btn=>btn.onclick=()=>check(Number(btn.dataset.option)));$("quizFeedback").classList.add("hidden");$("nextQuiz").classList.add("hidden");$("practicePanel").scrollIntoView({behavior:"smooth"});
 }
-function check(choice){
- if(answered||!quiz)return;answered=true;const ok=choice.toLowerCase()===quiz.a.toLowerCase();
- $("quizOptions").querySelectorAll("button").forEach(b=>{b.disabled=true;if(b.dataset.option===quiz.a)b.classList.add("correct");else if(b.dataset.option===choice&&!ok)b.classList.add("wrong")});
- $("quizFeedback").className="quiz-feedback "+(ok?"good":"try");$("quizFeedback").textContent=(ok?"That's right! ":"Good try. ")+quiz.why;
- attempts.unshift({topic:quiz.subject,question:quiz.q,correct:ok,at:Date.now()});attempts=attempts.slice(0,100);save("attempts",attempts);renderProgress();renderTeacher();$("nextQuiz").classList.remove("hidden");
+function check(choiceIndex){
+ if(answered||!quiz)return;answered=true;const ok=choiceIndex===quiz.a,lang=profile.medium;
+ $("quizOptions").querySelectorAll("button").forEach((btn,i)=>{btn.disabled=true;if(i===quiz.a)btn.classList.add("correct");else if(i===choiceIndex&&!ok)btn.classList.add("wrong")});
+ $("quizFeedback").className="quiz-feedback "+(ok?"good":"try");$("quizFeedback").textContent=(ok?"That's right! ":"Good try. ")+(quiz.why[lang]||quiz.why.en);
+ attempts.unshift({topic:quiz.subject,question:quiz.q[lang]||quiz.q.en,correct:ok,at:Date.now()});attempts=attempts.slice(0,100);save("attempts",attempts);renderProgress();renderTeacher();$("nextQuiz").classList.remove("hidden");
 }
 async function initCloud(){
  const url=import.meta.env.VITE_SUPABASE_URL,key=import.meta.env.VITE_SUPABASE_ANON_KEY;if(!url||!key)return;
