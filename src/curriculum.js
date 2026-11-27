@@ -104,11 +104,11 @@ export const BOOKS = [
   make(10,"Urdu","10_Urdu Text Book","ur","Urdu Books","10_Urdu Text Book","Urdu language textbook")
 ];
 export const AP_EDUCATION_STATS = {
-  academicYear: "2024–25",
-  totalSchoolsAllManagements: 61317,
-  totalEnrolmentAllManagements: 8454817,
-  governmentSchoolEnrolment: 3643083,
-  source: "UDISE+ 2024–25",
+  academicYear: "2025–26",
+  totalSchoolsAllManagements: 60843,
+  totalEnrolmentAllManagements: 8437049,
+  governmentSchoolEnrolment: 3493450,
+  source: "UDISE+ 2025–26",
   sourceUrl: "https://www.udiseplus.gov.in/"
 };
 export const MEDIUMS = [
