@@ -1,4 +1,4 @@
-import { BOOKS, SUBJECTS, PRACTICE, SAMPLE_EXPLANATIONS } from "./curriculum.js";
+import { BOOKS, SUBJECTS, PRACTICE, SAMPLE_EXPLANATIONS, AP_EDUCATION_STATS } from "./curriculum.js";
 const $ = id => document.getElementById(id);
 const STORE = "swarvidya-release-v1";
 const defaults = {name:"",grade:8,medium:"en",voice:"en-IN",district:"",school:"",year:"2026–27"};
@@ -34,7 +34,7 @@ function renderProgress(){
 }
 function renderTeacher(){
  const total=attempts.length,good=attempts.filter(a=>a.correct).length;
- $("teacherStats").innerHTML=`<article class="metric-card"><small>Local practice attempts</small><strong>${total}</strong><span>This device only</span></article><article class="metric-card"><small>Correct responses</small><strong>${total?Math.round(good/total*100):0}%</strong><span>Local sample metric</span></article><article class="metric-card"><small>Official books indexed</small><strong>${BOOKS.length}</strong><span>Classes 6–10</span></article>`;
+ $("teacherStats").innerHTML=`<article class="metric-card"><small>Local practice attempts</small><strong>${total}</strong><span>This device only</span></article><article class="metric-card"><small>Correct responses</small><strong>${total?Math.round(good/total*100):0}%</strong><span>Local sample metric</span></article><article class="metric-card"><small>Official book listings</small><strong>${BOOKS.length}</strong><span>Classes 6–10</span></article><article class="metric-card"><small>AP schools · all managements</small><strong>${AP_EDUCATION_STATS.totalSchoolsAllManagements.toLocaleString("en-IN")}</strong><span>UDISE+ ${AP_EDUCATION_STATS.academicYear}</span></article><article class="metric-card"><small>Enrolment · all schools</small><strong>${(AP_EDUCATION_STATS.totalEnrolmentAllManagements/100000).toFixed(2)} lakh</strong><span>UDISE+ ${AP_EDUCATION_STATS.academicYear}</span></article><article class="metric-card"><small>Government school enrolment</small><strong>${(AP_EDUCATION_STATS.governmentSchoolEnrolment/100000).toFixed(2)} lakh</strong><span>UDISE+ ${AP_EDUCATION_STATS.academicYear}</span></article>`;
  const grouped={};attempts.forEach(a=>{grouped[a.topic]??={n:0,c:0};grouped[a.topic].n++;if(a.correct)grouped[a.topic].c++});
  const rows=Object.entries(grouped).sort((a,b)=>a[1].c/a[1].n-b[1].c/b[1].n);
  $("weakTopics").innerHTML=rows.length?rows.map(([name,v])=>`<div class="activity-row"><div><strong>${esc(name)}</strong><small>${v.c} of ${v.n} correct</small></div><span class="activity-result">${Math.round(v.c/v.n*100)}%</span></div>`).join(""):'<p class="empty-state">Complete practice to see local topic signals. Shared classroom analytics need connected teacher accounts.</p>';
