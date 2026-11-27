@@ -1,11 +1,14 @@
 export default async function handler(req, res) {
+  res.setHeader("Cache-Control", "no-store");
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     return res.status(405).json({ error: "Method not allowed" });
   }
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) return res.status(503).json({ error: "Tutor service is not configured" });
-  const body = req.body || {};
+  const contentLength = Number(req.headers?.["content-length"] || 0);
+  if (contentLength > 12000) return res.status(413).json({ error: "Question request is too large." });
+  const body = req.body && typeof req.body === "object" && !Array.isArray(req.body) ? req.body : {};
   const question = typeof body.question === "string" ? body.question.trim() : "";
   if (!question || question.length > 1200) return res.status(400).json({ error: "Enter a question under 1,200 characters." });
   const grade = Math.min(10, Math.max(6, Number(body.grade) || 8));
@@ -16,6 +19,7 @@ export default async function handler(req, res) {
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json" },
+      signal: AbortSignal.timeout(20000),
       body: JSON.stringify({
         model,
         temperature: 0.25,
@@ -33,7 +37,6 @@ export default async function handler(req, res) {
     }
     const answer = data.choices?.[0]?.message?.content?.trim();
     if (!answer) return res.status(502).json({ error: "No explanation was returned." });
-    res.setHeader("Cache-Control", "no-store");
     return res.status(200).json({ answer, model, groundedToOfficialChapter: false });
   } catch (error) {
     console.error("Tutor request failed", error?.message || "unknown");
