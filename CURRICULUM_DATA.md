@@ -17,11 +17,15 @@ The portal currently exposes a 2024–25 bilingual textbook listing and title-wi
 - Telugu, English and Urdu voice-language settings.
 - A small set of clearly labelled supplementary practice explanations/questions to exercise the prototype learning loop.
 
+## Copyright and important content boundary
+
+The AP Department of School Education copyright policy states that site content must not be duplicated, copied, modified, adapted, redistributed or published without written permission. Individual textbook front matter also reserves reproduction rights to the Commissioner of School Education. SwarVidya therefore stores catalogue metadata and links out to the official portal; it does not host or reproduce the textbook PDFs. Obtain written permission before importing chapter text, translating or adapting textbook content, or publishing derived lesson packs. See the [AP Department copyright policy](https://cse.ap.gov.in/copyrightPolicy).
+
 ## Important content boundary
 
 This is a **textbook catalogue**, not yet a complete official chapter/lesson database. The government portal's PDF endpoints were not consistently retrievable during this integration, so chapter names, page ranges, official learning outcomes and question banks have deliberately not been invented. Every catalogue entry remains marked `not-yet-extracted`.
 
-Before calling a lesson "AP SCERT official" or publishing it to students, the source PDF must be obtained, its chapter index extracted, its edition/year checked, and the student-friendly explanation and translation reviewed by a qualified teacher. Keep source page references and reviewer details in the `lessons` table.
+Before calling a lesson "AP SCERT official" or publishing a derived lesson to students, secure written permission for the intended use, verify the source edition/year and chapter index, and have the student-friendly explanation and translation reviewed by a qualified teacher. Keep source page references and reviewer details in the lessons table.
 
 ## Language policy
 
