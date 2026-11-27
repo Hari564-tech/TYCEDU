@@ -1,31 +1,53 @@
 # Andhra Pradesh curriculum catalogue — Classes 6–10
 
-## Official sources indexed\n\nThe current settings form includes the 28 districts listed in the Government of India NIC directory and reflects the two newer districts, Markapuram and Polavaram.
+## Official sources
 
 1. [Samagra Shiksha AP — Telugu/English bilingual textbooks and workbooks](https://samagrashiksha.ap.gov.in/textBooksDownloadingPageTEBilingual)
 2. [Samagra Shiksha AP — title-wise textbook catalogue](https://samagrashiksha.ap.gov.in/textBooksDownloadingPagetitleWise)
 3. [Commissioner of School Education AP — title-wise textbook catalogue](https://cse.ap.gov.in/textBooksDownloadingPagetitleWise)
-4. [UDISE+](https://www.udiseplus.gov.in/) is used for public school-system statistics only, not student-level records.
+4. [UDISE+](https://www.udiseplus.gov.in/) — national school education statistics.
+5. [Government of India NIC — Andhra Pradesh district directory](https://igod.gov.in/sg/AP/E042/organizations)
 
-The portal currently exposes a 2024–25 bilingual textbook listing and title-wise books. The repository catalogue preserves the official book titles/file names and links back to the government portal. Urdu-labelled book entries are included where the government portal lists them for the grade and subject. The availability of a particular medium varies by book; the app must not imply every title exists in every medium.
+The settings form includes the 28 current districts listed by the Government of India NIC directory, including Markapuram and Polavaram.
 
-## What is in the application\n\nThe catalogue seed contains **87 book-listing records** across Classes 6–10. These are metadata records, not 87 extracted chapters.
+## Catalogue coverage in SwarVidya
 
-- Classes 6, 7, 8, 9 and 10.
-- Official book listing metadata for the subjects and media visible in the government catalogue.
-- Direct government-hosted download URLs generated from the official portal's linked book paths.
-- Telugu, English and Urdu voice-language settings.
-- A small set of clearly labelled supplementary practice explanations/questions to exercise the prototype learning loop.
+The repository contains **87 textbook-listing metadata records** across Classes 6–10. They are grouped by class, subject and the medium labels visible on the official catalogue. Telugu, English and Urdu filters are available, but not every book is published in every medium.
 
-## Copyright and important content boundary
+The official portal's bilingual textbook page is labelled 2024–25. The title-wise catalogue may contain entries with differing publication years; the app does not claim that every listed book is the latest 2026–27 edition. Verify the edition with the department before using it as the current school textbook.
 
-The AP Department of School Education copyright policy states that site content must not be duplicated, copied, modified, adapted, redistributed or published without written permission. Individual textbook front matter also reserves reproduction rights to the Commissioner of School Education. SwarVidya therefore stores catalogue metadata and links out to the official portal; it does not host or reproduce the textbook PDFs. Obtain written permission before importing chapter text, translating or adapting textbook content, or publishing derived lesson packs. See the [AP Department copyright policy](https://cse.ap.gov.in/copyrightPolicy).
+The app links learners to the official catalogue page. It does not host or redistribute the textbook PDFs.
 
-## Important content boundary
+## Andhra Pradesh education snapshot
 
-This is a **textbook catalogue**, not yet a complete official chapter/lesson database. The government portal's PDF endpoints were not consistently retrievable during this integration, so chapter names, page ranges, official learning outcomes and question banks have deliberately not been invented. Every catalogue entry remains marked `not-yet-extracted`.
+The teacher view displays the following statewide UDISE+ 2025–26 aggregates:
 
-Before calling a lesson "AP SCERT official" or publishing a derived lesson to students, secure written permission for the intended use, verify the source edition/year and chapter index, and have the student-friendly explanation and translation reviewed by a qualified teacher. Keep source page references and reviewer details in the lessons table.
+- Total schools across all managements: **60,843**
+- Total student enrolment across all managements: **8,437,049**
+- Government-school student enrolment: **3,493,450**
+
+These are state-level statistics, not a live feed and not an individual school directory. SwarVidya has not imported individual school records or student-level UDISE data. The district and school-name settings are currently user-entered profile preferences.
+
+Sources: [PIB — total schools, UDISE+ 2025–26](https://www.pib.gov.in/PressReleasePage.aspx?PRID=2291272&lang=1&reg=1); [UDISE+ 2025–26 reports](https://www.udiseplus.gov.in/).
+
+## Copyright and reuse boundary
+
+The AP Department of School Education copyright policy states that site content must not be duplicated, copied, modified, adapted, redistributed or published without written permission. Individual textbook front matter also reserves reproduction rights to the Commissioner of School Education. SwarVidya therefore links to the official portal and does not host or reproduce the textbook PDFs.
+
+Obtain written permission before embedding government catalogue content in a commercial product, importing chapter text, translating or adapting textbook content, or publishing derived lesson packs. See the [AP Department copyright policy](https://cse.ap.gov.in/copyrightPolicy).
+
+## Lesson and chapter status
+
+This is a **textbook catalogue**, not yet a complete official chapter/lesson database. The government PDF endpoints could not be consistently retrieved during this integration, and the department's reuse restrictions must be respected. Therefore chapter titles, page ranges, official learning outcomes and question banks have deliberately not been invented. Every catalogue entry remains marked `not-yet-extracted`.
+
+The app includes ten short practice questions and three sample explanations in Telugu, English and Urdu. These are clearly labelled supplementary learning aids, not official textbook extracts or teacher-approved AP SCERT lessons.
+
+Before publishing an AP curriculum-aligned lesson:
+1. Confirm the exact academic-year edition and textbook medium.
+2. Secure written permission for the intended use of textbook material.
+3. Create original, age-appropriate explanations and questions with clear source references.
+4. Have qualified AP teachers review each Telugu, English and Urdu version.
+5. Record source page references, reviewer and approval status in the lessons database.
 
 ## Language policy
 
@@ -37,12 +59,10 @@ Voice language is a learner preference and may differ from the textbook medium. 
 
 ## Refresh process
 
-1. Check the official catalogue pages for a new academic-year edition.
-2. Review each book's title, medium, file link and publication year.
-3. Download/inspect the official PDF and extract only the metadata and chapter references needed for the lesson index.
-4. Check reuse permissions and attribution requirements before storing or redistributing PDF content.
-5. Create draft lessons with page references.
-6. Have an AP school teacher review each language version before publishing.
-7. Run `npm run seed:curriculum` with server-side service-role credentials to upsert the book catalogue.
+1. Check the official catalogue pages for new academic-year editions.
+2. Verify title, subject, medium, publication year and source link.
+3. Obtain written permission before importing or adapting textbook content.
+4. Create draft lessons with source references and teacher review.
+5. Run `npm run seed:curriculum` with server-side service-role credentials to upsert the textbook catalogue.
 
-Do not commit a Supabase service-role key or OpenAI API key.
+Never commit a Supabase service-role key or OpenAI API key.
