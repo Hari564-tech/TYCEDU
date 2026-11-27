@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f6ef" />
+    <meta name="description" content="SwarVidya — learn by speaking, understand in your language." />
+    <title>SwarVidya — Learn by speaking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="SwarVidya home">
+          <span class="brand-mark"><span></span><span></span><span></span></span>
+          <span>Swar<span>Vidya</span></span>
+        </a>
+        <div class="top-actions">
+          <span class="class-pill">✦ Learning space</span>
+          <button class="avatar" aria-label="Student profile">A</button>
+        </div>
+      </header>
+
+      <main class="shell">
+        <section class="welcome">
+          <div class="welcome-copy">
+            <p class="eyebrow"><span class="spark">✳</span> YOUR LITTLE LEARNING CORNER</p>
+            <h1>Hey, learner!<br><span>What shall we explore?</span></h1>
+            <p class="welcome-sub">Big questions are welcome here. Just speak, listen and learn.</p>
+          </div>
+          <div class="welcome-art" aria-hidden="true">
+            <div class="sun"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+            <div class="book book-back"></div><div class="book book-front"><i></i><i></i><i></i></div>
+            <div class="tiny-star star-one">✦</div><div class="tiny-star star-two">✳</div>
+            <div class="bubble">Let's learn!</div>
+          </div>
+        </section>
+
+        <section class="setup-card" aria-label="Choose your learning level">
+          <div class="setup-title"><div><span class="section-kicker">LET'S GET STARTED</span><h2>Make it yours</h2></div><span class="step-tag">STEP 01</span></div>
+          <div class="selectors">
+            <label>I'm in
+              <select id="classSelect" aria-label="Choose class">
+                <option>Class 6</option><option>Class 7</option><option selected>Class 8</option><option>Class 9</option><option>Class 10</option>
+              </select>
+            </label>
+            <label>Today I'm learning
+              <select id="subjectSelect" aria-label="Choose subject">
+                <option>Maths</option><option selected>Science</option><option>English</option><option>Social</option>
+              </select>
+            </label>
+            <label>Explain in
+              <select id="languageSelect" aria-label="Choose language">
+                <option value="te-IN" selected>తెలుగు · Telugu</option><option value="hi-IN">हिन्दी · Hindi</option><option value="en-IN">English</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <div class="content-grid">
+          <section class="learn-panel">
+            <div class="panel-heading">
+              <div><span class="section-kicker">YOUR VOICE IS YOUR SUPERPOWER</span><h2>Ask me anything</h2></div>
+              <span class="friendly-icon">♫</span>
+            </div>
+            <p class="muted">Tap the mic and ask a question. You can also type if that's easier.</p>
+            <div class="voice-stage">
+              <div class="sound-rings"><span></span><span></span><span></span></div>
+              <button id="micButton" class="mic-button" aria-label="Start speaking"><span class="mic-glyph">🎙</span><span class="mic-label">TAP TO SPEAK</span></button>
+              <p id="voiceStatus" class="voice-status" aria-live="polite">I'm listening whenever you're ready.</p>
+            </div>
+            <div class="transcript-box">
+              <div class="transcript-head"><span>WHAT I HEARD</span><span class="live-dot"></span></div>
+              <textarea id="questionInput" rows="2" placeholder="Your question will appear here… or type it in"></textarea>
+              <div class="prompt-row"><button class="suggestion" data-question="What is photosynthesis?">What is photosynthesis?</button><button class="suggestion" data-question="Explain the water cycle">Water cycle</button></div>
+            </div>
+            <button id="askButton" class="primary-button">Explain it to me <span>↗</span></button>
+            <div id="answerCard" class="answer-card hidden" aria-live="polite">
+              <div class="answer-top"><span class="answer-badge">✦ YOUR EXPLANATION</span><button id="speakButton" class="listen-button">▶ Listen</button></div>
+              <h3 id="answerTitle">Here's the simple version</h3>
+              <p id="answerText"></p>
+              <div id="answerExtra" class="answer-extra"></div>
+            </div>
+          </section>
+
+          <aside class="practice-panel">
+            <div class="panel-heading"><div><span class="section-kicker">A TINY CHALLENGE</span><h2>Practice time</h2></div><span class="practice-icon">✎</span></div>
+            <p class="muted">One little question can make a big difference.</p>
+            <div class="quiz-card">
+              <div class="quiz-meta"><span id="quizTopic">SCIENCE · QUICK CHECK</span><span id="quizCount">01 / 05</span></div>
+              <h3 id="quizQuestion">Which part of a plant makes most of its food?</h3>
+              <div id="quizOptions" class="quiz-options">
+                <button class="quiz-option" data-answer="roots">Roots</button>
+                <button class="quiz-option" data-answer="leaves">Leaves</button>
+                <button class="quiz-option" data-answer="flower">Flower</button>
+              </div>
+              <div class="quiz-voice"><button id="quizMic" class="small-mic">🎙</button><span id="quizVoiceStatus">Or say your answer</span></div>
+              <div id="quizFeedback" class="quiz-feedback hidden" aria-live="polite"></div>
+              <button id="nextQuiz" class="next-button hidden">Next question <span>→</span></button>
+            </div>
+            <div class="streak-strip"><span class="streak-icon">✦</span><div><strong id="scoreText">Your progress starts here</strong><small id="scoreSub">Every try helps you grow.</small></div></div>
+          </aside>
+        </div>
+
+        <section class="teacher-section" id="teacher">
+          <div class="teacher-head"><div><span class="section-kicker">FOR THE PEOPLE WHO HELP YOU GROW</span><h2>Teacher's view</h2><p class="muted">A simple snapshot of learning activity on this device.</p></div><span class="teacher-sticker">✿</span></div>
+          <div class="stats-grid">
+            <article class="stat-card"><span class="stat-icon lavender">♧</span><small>Practice attempts</small><strong id="attemptCount">0</strong><span class="stat-note">Across all topics</span></article>
+            <article class="stat-card"><span class="stat-icon peach">✎</span><small>Questions explored</small><strong id="questionCount">0</strong><span class="stat-note">Curiosity in action</span></article>
+            <article class="stat-card"><span class="stat-icon mint">★</span><small>Correct answers</small><strong id="correctCount">0%</strong><span class="stat-note">Keep going!</span></article>
+          </div>
+          <div class="teacher-lower">
+            <div class="topic-card"><div class="topic-head"><h3>Topics to revisit</h3><span>BASED ON PRACTICE</span></div><div id="weakTopics" class="topic-list"><p class="empty-state">Complete a practice question to see topic insights.</p></div></div>
+            <div class="recent-card"><div class="topic-head"><h3>Recent learning</h3><span>THIS DEVICE</span></div><div id="recentList" class="recent-list"><p class="empty-state">Your recent questions will show up here.</p></div></div>
+          </div>
+          <p class="privacy-note">🔒 Demo privacy: activity is stored only in this browser using localStorage. No student data is sent to a server.</p>
+        </section>
+
+        <section class="how-section">
+          <div><span class="section-kicker">AS EASY AS 1–2–3</span><h2>Learning, in your own voice.</h2></div>
+          <div class="how-steps"><article><span>01</span><div class="step-illustration">🎙</div><h3>Speak your doubt</h3><p>Ask in the language that feels like you.</p></article><article><span>02</span><div class="step-illustration">💬</div><h3>Listen & understand</h3><p>Get a short, friendly explanation out loud.</p></article><article><span>03</span><div class="step-illustration">🌱</div><h3>Practice & grow</h3><p>Try a quick question. Your teacher sees progress.</p></article></div>
+        </section>
+
+        <footer><a class="brand footer-brand" href="#"><span class="brand-mark"><span></span><span></span><span></span></span><span>Swar<span>Vidya</span></span></a><p>Learn by speaking. Understand in your language.</p><span class="footer-note">A voice-first learning prototype · Made for curious minds</span></footer>
+      </main>
+      <nav class="mobile-nav" aria-label="Main navigation"><a href="#" class="active"><span>⌂</span>Learn</a><a href="#teacher"><span>▤</span>Teacher view</a><a href="#teacher"><span>♡</span>Progress</a></nav>
+      <div id="toast" class="toast" role="status"></div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
