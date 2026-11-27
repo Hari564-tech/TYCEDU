@@ -103,6 +103,14 @@ export const BOOKS = [
   make(10,"Social Studies","10_Social_History_Textbook_UM","ur","Social Books","10_Social_History_Textbook_UM","Urdu-labelled textbook"),
   make(10,"Urdu","10_Urdu Text Book","ur","Urdu Books","10_Urdu Text Book","Urdu language textbook")
 ];
+export const AP_EDUCATION_STATS = {
+  academicYear: "2024–25",
+  totalSchoolsAllManagements: 61317,
+  totalEnrolmentAllManagements: 8454817,
+  governmentSchoolEnrolment: 3643083,
+  source: "UDISE+ 2024–25",
+  sourceUrl: "https://www.udiseplus.gov.in/"
+};
 export const MEDIUMS = [
   {id:"te",label:"Telugu",speech:"te-IN"},
   {id:"en",label:"English",speech:"en-IN"},
