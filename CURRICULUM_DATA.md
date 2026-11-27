@@ -20,11 +20,11 @@ The app links learners to the official catalogue page. It does not host or redis
 
 ## Andhra Pradesh education snapshot
 
-The teacher view displays the following statewide UDISE+ 2025–26 aggregates:
+The teacher view displays the following statewide UDISE+ 2025–26 aggregates (enrolment is provisional):
 
 - Total schools across all managements: **60,843**
-- Total student enrolment across all managements: **8,437,049**
-- Government-school student enrolment: **3,493,450**
+- Total student enrolment across all managements: **8,328,448**
+- Government-school student enrolment: **3,493,449**
 
 These are state-level statistics, not a live feed and not an individual school directory. SwarVidya has not imported individual school records or student-level UDISE data. The district and school-name settings are currently user-entered profile preferences.
 
