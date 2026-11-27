@@ -1,3 +1,4 @@
+import "./style.css";
 import { BOOKS, SUBJECTS, PRACTICE, SAMPLE_EXPLANATIONS, AP_EDUCATION_STATS } from "./curriculum.js";
 const $ = id => document.getElementById(id);
 const STORE = "swarvidya-release-v1";
