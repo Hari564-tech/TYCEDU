@@ -106,10 +106,10 @@ export const BOOKS = [
 export const AP_EDUCATION_STATS = {
   academicYear: "2025–26",
   totalSchoolsAllManagements: 60843,
-  totalEnrolmentAllManagements: 8437049,
-  governmentSchoolEnrolment: 3493450,
-  source: "UDISE+ 2025–26",
-  sourceUrl: "https://www.udiseplus.gov.in/"
+  totalEnrolmentAllManagements: 8328448,
+  governmentSchoolEnrolment: 3493449,
+  source: "UDISE+ 2025–26 provisional",
+  sourceUrl: "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2291272&lang=1&reg=1"
 };
 export const MEDIUMS = [
   {id:"te",label:"Telugu",speech:"te-IN"},
