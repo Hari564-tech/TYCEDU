@@ -17,16 +17,16 @@ assert.ok(BOOKS.every(book => /^https:\/\//.test(book.downloadUrl)), "Every cata
 
 for (const [index, question] of PRACTICE.entries()) {
   for (const language of ["te", "en", "ur"]) {
-    assert.ok(question.q?.[language], \`Question \${index + 1} is missing \${language} text\`);
-    assert.ok(Array.isArray(question.opts?.[language]) && question.opts[language].length >= 2, \`Question \${index + 1} is missing \${language} options\`);
-    assert.ok(question.why?.[language], \`Question \${index + 1} is missing \${language} feedback\`);
+    assert.ok(question.q?.[language], "Question " + (index + 1) + " is missing " + language + " text");
+    assert.ok(Array.isArray(question.opts?.[language]) && question.opts[language].length >= 2, "Question " + (index + 1) + " is missing " + language + " options");
+    assert.ok(question.why?.[language], "Question " + (index + 1) + " is missing " + language + " feedback");
   }
-  assert.ok(question.a >= 0 && question.a < question.opts.en.length, \`Question \${index + 1} answer index is invalid\`);
+  assert.ok(question.a >= 0 && question.a < question.opts.en.length, "Question " + (index + 1) + " answer index is invalid");
 }
 
 const ids = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]));
 const missing = [...new Set([...main.matchAll(/\$\("([^"]+)"\)/g)].map(match => match[1]).filter(id => !ids.has(id)))];
-assert.deepEqual(missing, [], \`Missing HTML elements referenced by main.js: \${missing.join(", ")}\`);
+assert.deepEqual(missing, [], "Missing HTML elements referenced by main.js: " + missing.join(", "));
 assert.ok(!html.includes("\\n  <link"), "HTML contains a literal escaped newline");
 assert.ok(!css.includes("\\n.data-footnote"), "CSS contains a literal escaped newline");
 assert.ok(!sql.includes("\\nreturns trigger"), "SQL contains a literal escaped newline");
