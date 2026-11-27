@@ -60,9 +60,9 @@ SUPABASE_URL="..." SUPABASE_SERVICE_ROLE_KEY="..." npm run seed:curriculum
 
 The application does not currently create student accounts or join classrooms. This is intentional until school onboarding, guardian/school consent and child-data handling have been agreed.
 
-## Curriculum source and content status
+## Curriculum source, copyright and content status
 
-See [CURRICULUM_DATA.md](CURRICULUM_DATA.md). The current official source catalogue indexes government-listed books. Chapter titles and lesson text have **not** been claimed as official because the PDF endpoints could not be consistently retrieved and reviewed during this pass. Do not publish an unreviewed AI translation as official curriculum.
+See [CURRICULUM_DATA.md](CURRICULUM_DATA.md). The current official source catalogue indexes 87 government-listed books. The AP Department copyright policy restricts copying, adaptation and redistribution without written permission, so SwarVidya links to the official portal and does not host textbook PDFs. Chapter titles and lesson text have **not** been claimed as official. Obtain written permission before importing or adapting textbook content, then have each language version teacher-reviewed.
 
 ## Security and child privacy
 
