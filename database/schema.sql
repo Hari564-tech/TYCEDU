@@ -133,7 +133,7 @@ create or replace function public.is_teacher_of_student(target_student uuid)
 returns boolean language sql stable security definer set search_path = public
 as $$ select exists(select 1 from public.classrooms c join public.classroom_members m on m.classroom_id=c.id where c.teacher_id=auth.uid() and m.student_id=target_student) $$;
 
-create or replace function public.handle_new_user()
+create or replace function public.prevent_client_role_change()\nreturns trigger language plpgsql\nset search_path = public\nas $\nbegin\n  if new.role is distinct from old.role and current_user not in ('postgres','service_role','supabase_admin') then\n    raise exception 'Role changes must be performed by a trusted administrator';\n  end if;\n  return new;\nend;\n$;\n\ndrop trigger if exists prevent_profile_role_change on public.profiles;\ncreate trigger prevent_profile_role_change before update on public.profiles\nfor each row execute procedure public.prevent_client_role_change();\n\ncreate or replace function public.handle_new_user()
 returns trigger language plpgsql security definer set search_path = public
 as $$
 begin
@@ -177,3 +177,16 @@ create policy "students insert own attempts" on public.practice_attempts for ins
 
 -- Provision teacher/admin roles only through a trusted administrator or SQL editor.
 -- Never let a browser client promote itself by updating profiles.role.
+
+grant usage on schema public to anon, authenticated;
+grant select on public.curriculum_books to anon, authenticated;
+grant select on public.lessons to anon, authenticated;
+grant select on public.lesson_questions to anon, authenticated;
+grant select on public.schools to authenticated;
+grant select, update on public.profiles to authenticated;
+grant select, insert, update on public.classrooms to authenticated;
+grant select, insert, update, delete on public.classroom_members to authenticated;
+grant select, insert on public.practice_attempts to authenticated;
+grant insert, update, delete on public.curriculum_books to authenticated;
+grant insert, update on public.lessons to authenticated;
+grant insert, update, delete on public.lesson_questions to authenticated;
