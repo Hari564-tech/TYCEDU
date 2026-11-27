@@ -1,6 +1,6 @@
 # Andhra Pradesh curriculum catalogue — Classes 6–10
 
-## Official sources indexed
+## Official sources indexed\n\nThe current settings form includes the 28 districts listed in the Government of India NIC directory and reflects the two newer districts, Markapuram and Polavaram.
 
 1. [Samagra Shiksha AP — Telugu/English bilingual textbooks and workbooks](https://samagrashiksha.ap.gov.in/textBooksDownloadingPageTEBilingual)
 2. [Samagra Shiksha AP — title-wise textbook catalogue](https://samagrashiksha.ap.gov.in/textBooksDownloadingPagetitleWise)
