@@ -1,134 +1,83 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f7f6ef" />
-    <meta name="description" content="SwarVidya — learn by speaking, understand in your language." />
-    <title>SwarVidya — Learn by speaking</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/src/style.css" />
-  </head>
-  <body>
-    <div id="app">
-      <header class="topbar">
-        <a class="brand" href="#" aria-label="SwarVidya home">
-          <span class="brand-mark"><span></span><span></span><span></span></span>
-          <span>Swar<span>Vidya</span></span>
-        </a>
-        <div class="top-actions">
-          <span class="class-pill">✦ Learning space</span>
-          <button class="avatar" aria-label="Student profile">A</button>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f6ef">
+  <meta name="description" content="SwarVidya is a multilingual, voice-first learning companion for Andhra Pradesh school students.">
+  <title>SwarVidya — Learn in your voice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <a class="brand" href="#" data-view="learn" aria-label="SwarVidya home"><span class="brand-mark"><i></i><i></i><i></i></span><span>Swar<span>Vidya</span></span></a>
+    <div class="topbar-right"><span class="state-chip">ANDHRA PRADESH · SCHOOL LEARNING</span><button id="settingsButton" class="icon-button" aria-label="Settings">⚙</button><button id="accountButton" class="account-button"><span class="avatar">S</span><span id="accountLabel">My learning</span></button></div>
+  </header>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-label">WORKSPACE</div>
+      <button class="nav-item active" data-view="learn"><span>⌂</span> Learn</button>
+      <button class="nav-item" data-view="library"><span>▤</span> Curriculum library</button>
+      <button class="nav-item" data-view="progress"><span>↗</span> My progress</button>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-label">FOR EDUCATORS</div>
+      <button class="nav-item" data-view="teacher"><span>♧</span> Teacher space</button>
+      <div class="sidebar-bottom"><div class="offline-mark"></div><div><strong id="connectionLabel">Ready to learn</strong><small id="connectionDetail">Your progress saves on this device</small></div></div>
+    </aside>
+    <main class="main-content">
+      <section id="view-learn" class="view active">
+        <div class="welcome-banner">
+          <div><div class="eyebrow"><span>✳</span> YOUR LEARNING SPACE</div><h1>Learn in your voice.<br><em>Grow at your pace.</em></h1><p>Ask a doubt, explore your school lessons and practise a little every day.</p><div class="welcome-controls"><label>CLASS <select id="classSelect"><option value="6">Class 6</option><option value="7">Class 7</option><option value="8" selected>Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option></select></label><label>MEDIUM <select id="mediumSelect"><option value="te">Telugu</option><option value="en" selected>English</option><option value="ur">Urdu</option></select></label><label>VOICE LANGUAGE <select id="voiceSelect"><option value="te-IN">తెలుగు</option><option value="hi-IN">हिन्दी</option><option value="ur-IN">اردو</option><option value="en-IN" selected>English</option></select></label></div></div>
+          <div class="hero-art" aria-hidden="true"><div class="hero-sun"></div><div class="hero-orbit"></div><div class="hero-book"><span></span><span></span><span></span></div><b>Let's explore!</b><i>✦</i></div>
         </div>
-      </header>
-
-      <main class="shell">
-        <section class="welcome">
-          <div class="welcome-copy">
-            <p class="eyebrow"><span class="spark">✳</span> YOUR LITTLE LEARNING CORNER</p>
-            <h1>Hey, learner!<br><span>What shall we explore?</span></h1>
-            <p class="welcome-sub">Big questions are welcome here. Just speak, listen and learn.</p>
-          </div>
-          <div class="welcome-art" aria-hidden="true">
-            <div class="sun"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-            <div class="book book-back"></div><div class="book book-front"><i></i><i></i><i></i></div>
-            <div class="tiny-star star-one">✦</div><div class="tiny-star star-two">✳</div>
-            <div class="bubble">Let's learn!</div>
-          </div>
-        </section>
-
-        <section class="setup-card" aria-label="Choose your learning level">
-          <div class="setup-title"><div><span class="section-kicker">LET'S GET STARTED</span><h2>Make it yours</h2></div><span class="step-tag">STEP 01</span></div>
-          <div class="selectors">
-            <label>I'm in
-              <select id="classSelect" aria-label="Choose class">
-                <option>Class 6</option><option>Class 7</option><option selected>Class 8</option><option>Class 9</option><option>Class 10</option>
-              </select>
-            </label>
-            <label>Today I'm learning
-              <select id="subjectSelect" aria-label="Choose subject">
-                <option>Maths</option><option selected>Science</option><option>English</option><option>Social</option>
-              </select>
-            </label>
-            <label>Explain in
-              <select id="languageSelect" aria-label="Choose language">
-                <option value="te-IN" selected>తెలుగు · Telugu</option><option value="hi-IN">हिन्दी · Hindi</option><option value="en-IN">English</option>
-              </select>
-            </label>
-          </div>
-        </section>
-
-        <div class="content-grid">
-          <section class="learn-panel">
-            <div class="panel-heading">
-              <div><span class="section-kicker">YOUR VOICE IS YOUR SUPERPOWER</span><h2>Ask me anything</h2></div>
-              <span class="friendly-icon">♫</span>
-            </div>
-            <p class="muted">Tap the mic and ask a question. You can also type if that's easier.</p>
-            <div class="voice-stage">
-              <div class="sound-rings"><span></span><span></span><span></span></div>
-              <button id="micButton" class="mic-button" aria-label="Start speaking"><span class="mic-glyph">🎙</span><span class="mic-label">TAP TO SPEAK</span></button>
-              <p id="voiceStatus" class="voice-status" aria-live="polite">I'm listening whenever you're ready.</p>
-            </div>
-            <div class="transcript-box">
-              <div class="transcript-head"><span>WHAT I HEARD</span><span class="live-dot"></span></div>
-              <textarea id="questionInput" rows="2" placeholder="Your question will appear here… or type it in"></textarea>
-              <div class="prompt-row"><button class="suggestion" data-question="What is photosynthesis?">What is photosynthesis?</button><button class="suggestion" data-question="Explain the water cycle">Water cycle</button></div>
-            </div>
+        <div class="section-heading"><div><span class="section-kicker">PICK UP WHERE YOU LEFT OFF</span><h2>Your subjects</h2></div><button class="text-action" data-view="library">View curriculum library ↗</button></div>
+        <div id="subjectGrid" class="subject-grid"></div>
+        <div class="learning-grid">
+          <section class="panel ask-panel">
+            <div class="panel-heading"><div><span class="section-kicker">YOUR VOICE IS YOUR SUPERPOWER</span><h2>Ask a learning doubt</h2></div><span class="panel-symbol">♫</span></div>
+            <p class="muted">Ask in Telugu, English or Urdu. You can type your question too.</p>
+            <div class="voice-zone"><div class="voice-halo"></div><button id="micButton" class="mic-button"><span>🎙</span><small>TAP TO SPEAK</small></button><p id="voiceStatus" aria-live="polite">I'm listening whenever you're ready.</p></div>
+            <textarea id="questionInput" class="question-input" rows="2" placeholder="Ask a question about your lesson…"></textarea>
+            <div class="sample-prompts"><button data-question="Explain photosynthesis in simple words">Photosynthesis</button><button data-question="How do fractions work?">Fractions</button><button data-question="Explain the water cycle">Water cycle</button></div>
             <button id="askButton" class="primary-button">Explain it to me <span>↗</span></button>
-            <div id="answerCard" class="answer-card hidden" aria-live="polite">
-              <div class="answer-top"><span class="answer-badge">✦ YOUR EXPLANATION</span><button id="speakButton" class="listen-button">▶ Listen</button></div>
-              <h3 id="answerTitle">Here's the simple version</h3>
-              <p id="answerText"></p>
-              <div id="answerExtra" class="answer-extra"></div>
-            </div>
+            <div id="answerCard" class="answer-card hidden" aria-live="polite"><div class="answer-tools"><span>✦ LEARNING EXPLANATION</span><button id="speakButton" class="listen-button">▶ Listen</button></div><h3 id="answerTitle"></h3><p id="answerText"></p><small id="answerSource"></small></div>
           </section>
-
-          <aside class="practice-panel">
-            <div class="panel-heading"><div><span class="section-kicker">A TINY CHALLENGE</span><h2>Practice time</h2></div><span class="practice-icon">✎</span></div>
-            <p class="muted">One little question can make a big difference.</p>
-            <div class="quiz-card">
-              <div class="quiz-meta"><span id="quizTopic">SCIENCE · QUICK CHECK</span><span id="quizCount">01 / 05</span></div>
-              <h3 id="quizQuestion">Which part of a plant makes most of its food?</h3>
-              <div id="quizOptions" class="quiz-options">
-                <button class="quiz-option" data-answer="roots">Roots</button>
-                <button class="quiz-option" data-answer="leaves">Leaves</button>
-                <button class="quiz-option" data-answer="flower">Flower</button>
-              </div>
-              <div class="quiz-voice"><button id="quizMic" class="small-mic">🎙</button><span id="quizVoiceStatus">Or say your answer</span></div>
-              <div id="quizFeedback" class="quiz-feedback hidden" aria-live="polite"></div>
-              <button id="nextQuiz" class="next-button hidden">Next question <span>→</span></button>
-            </div>
-            <div class="streak-strip"><span class="streak-icon">✦</span><div><strong id="scoreText">Your progress starts here</strong><small id="scoreSub">Every try helps you grow.</small></div></div>
-          </aside>
+          <section class="panel lesson-panel">
+            <div class="panel-heading"><div><span class="section-kicker">OFFICIAL TEXTBOOK CATALOGUE</span><h2>Continue your lessons</h2></div><span class="panel-symbol book-symbol">▤</span></div>
+            <p class="muted">Books listed by Andhra Pradesh's School Education Department.</p>
+            <div id="featuredBooks" class="featured-books"></div>
+            <button class="secondary-button" data-view="library">Browse all textbooks <span>→</span></button>
+          </section>
         </div>
+        <section class="practice-strip"><div><span class="section-kicker">SMALL STEPS, STRONGER LEARNING</span><h2>Ready for a quick check?</h2><p>Try a short practice question and see what you remember.</p></div><button class="primary-button" id="startPractice">Start practice <span>↗</span></button></section>
+        <section id="practicePanel" class="panel practice-panel hidden"><div class="panel-heading"><div><span class="section-kicker">QUICK PRACTICE</span><h2 id="quizTitle">One question at a time</h2></div><span id="quizCount" class="step-pill">01 / 05</span></div><h3 id="quizQuestion"></h3><div id="quizOptions" class="quiz-options"></div><div id="quizFeedback" class="quiz-feedback hidden" aria-live="polite"></div><button id="nextQuiz" class="secondary-button hidden">Next question →</button></section>
+      </section>
 
-        <section class="teacher-section" id="teacher">
-          <div class="teacher-head"><div><span class="section-kicker">FOR THE PEOPLE WHO HELP YOU GROW</span><h2>Teacher's view</h2><p class="muted">A simple snapshot of learning activity on this device.</p></div><span class="teacher-sticker">✿</span></div>
-          <div class="stats-grid">
-            <article class="stat-card"><span class="stat-icon lavender">♧</span><small>Practice attempts</small><strong id="attemptCount">0</strong><span class="stat-note">Across all topics</span></article>
-            <article class="stat-card"><span class="stat-icon peach">✎</span><small>Questions explored</small><strong id="questionCount">0</strong><span class="stat-note">Curiosity in action</span></article>
-            <article class="stat-card"><span class="stat-icon mint">★</span><small>Correct answers</small><strong id="correctCount">0%</strong><span class="stat-note">Keep going!</span></article>
-          </div>
-          <div class="teacher-lower">
-            <div class="topic-card"><div class="topic-head"><h3>Topics to revisit</h3><span>BASED ON PRACTICE</span></div><div id="weakTopics" class="topic-list"><p class="empty-state">Complete a practice question to see topic insights.</p></div></div>
-            <div class="recent-card"><div class="topic-head"><h3>Recent learning</h3><span>THIS DEVICE</span></div><div id="recentList" class="recent-list"><p class="empty-state">Your recent questions will show up here.</p></div></div>
-          </div>
-          <p class="privacy-note">🔒 Demo privacy: activity is stored only in this browser using localStorage. No student data is sent to a server.</p>
-        </section>
+      <section id="view-library" class="view">
+        <div class="page-intro"><span class="section-kicker">AP GOVERNMENT TEXTBOOKS</span><h1>Curriculum library</h1><p>Browse official textbook listings by class, subject and available medium.</p><div class="source-note"><span>✓</span><div><strong>Official source catalogue</strong><small>Book names and source links are indexed from the AP School Education Department portals. Chapter-level lesson extraction is a separate content-ingestion step.</small></div></div></div>
+        <div class="library-filters"><label>CLASS<select id="libraryClass"><option value="6">Class 6</option><option value="7">Class 7</option><option value="8" selected>Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option></select></label><label>MEDIUM<select id="libraryMedium"><option value="all">All available</option><option value="te">Telugu / bilingual</option><option value="en">English</option><option value="ur">Urdu</option></select></label><label>SUBJECT<select id="librarySubject"><option value="all">All subjects</option><option value="Mathematics">Mathematics</option><option value="Science">Science</option><option value="Social Studies">Social Studies</option><option value="English">English</option><option value="Telugu">Telugu</option><option value="Hindi">Hindi</option><option value="Urdu">Urdu</option></select></label></div>
+        <div id="catalogueSummary" class="catalogue-summary"></div><div id="bookGrid" class="book-grid"></div>
+      </section>
 
-        <section class="how-section">
-          <div><span class="section-kicker">AS EASY AS 1–2–3</span><h2>Learning, in your own voice.</h2></div>
-          <div class="how-steps"><article><span>01</span><div class="step-illustration">🎙</div><h3>Speak your doubt</h3><p>Ask in the language that feels like you.</p></article><article><span>02</span><div class="step-illustration">💬</div><h3>Listen & understand</h3><p>Get a short, friendly explanation out loud.</p></article><article><span>03</span><div class="step-illustration">🌱</div><h3>Practice & grow</h3><p>Try a quick question. Your teacher sees progress.</p></article></div>
-        </section>
+      <section id="view-progress" class="view">
+        <div class="page-intro"><span class="section-kicker">YOUR LEARNING JOURNEY</span><h1>My progress</h1><p>A private view of practice activity saved on this device.</p></div>
+        <div class="progress-stats" id="progressStats"></div><div class="panel"><div class="panel-heading"><div><span class="section-kicker">RECENT ACTIVITY</span><h2>What you've explored</h2></div></div><div id="recentActivity" class="activity-list"></div></div>
+      </section>
 
-        <footer><a class="brand footer-brand" href="#"><span class="brand-mark"><span></span><span></span><span></span></span><span>Swar<span>Vidya</span></span></a><p>Learn by speaking. Understand in your language.</p><span class="footer-note">A voice-first learning prototype · Made for curious minds</span></footer>
-      </main>
-      <nav class="mobile-nav" aria-label="Main navigation"><a href="#" class="active"><span>⌂</span>Learn</a><a href="#teacher"><span>▤</span>Teacher view</a><a href="#teacher"><span>♡</span>Progress</a></nav>
-      <div id="toast" class="toast" role="status"></div>
-    </div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
-</html>
+      <section id="view-teacher" class="view">
+        <div class="page-intro"><span class="section-kicker">TEACHER WORKSPACE</span><h1>Support every learner</h1><p>Review local practice signals and explore the official textbook catalogue.</p><div class="teacher-notice"><strong>Prototype mode</strong><span>Classroom accounts, shared student records and school-level analytics activate after Supabase is configured and staff accounts are provisioned.</span></div></div>
+        <div id="teacherStats" class="progress-stats"></div><div class="teacher-columns"><div class="panel"><div class="panel-heading"><div><span class="section-kicker">PRACTICE SIGNALS</span><h2>Topics to revisit</h2></div></div><div id="weakTopics" class="activity-list"></div></div><div class="panel"><div class="panel-heading"><div><span class="section-kicker">CURRICULUM SOURCES</span><h2>Official resources</h2></div></div><a class="resource-link" href="https://samagrashiksha.ap.gov.in/textBooksDownloadingPageTEBilingual" target="_blank" rel="noreferrer">Telugu–English bilingual textbooks <span>↗</span></a><a class="resource-link" href="https://samagrashiksha.ap.gov.in/textBooksDownloadingPagetitleWise" target="_blank" rel="noreferrer">Title-wise textbook catalogue <span>↗</span></a><a class="resource-link" href="https://www.udiseplus.gov.in/" target="_blank" rel="noreferrer">UDISE+ school statistics <span>↗</span></a></div></div>
+      </section>
+    </main>
+  </div>
+  <dialog id="settingsDialog" class="settings-dialog"><form method="dialog"><div class="dialog-head"><div><span class="section-kicker">PERSONALISE YOUR SPACE</span><h2>Learning settings</h2></div><button class="close-button" aria-label="Close">×</button></div><label>Your display name<input id="displayName" maxlength="40" placeholder="What should we call you?"></label><label>District<select id="districtSelect"><option value="">Choose district (optional)</option><option>Alluri Sitharama Raju</option><option>Anakapalli</option><option>Ananthapuramu</option><option>Annamayya</option><option>Bapatla</option><option>Chittoor</option><option>Dr. B.R. Ambedkar Konaseema</option><option>East Godavari</option><option>Eluru</option><option>Guntur</option><option>Kakinada</option><option>Krishna</option><option>Kurnool</option><option>Manyam</option><option>NTR</option><option>Palnadu</option><option>Prakasam</option><option>Sri Potti Sriramulu Nellore</option><option>Sri Sathya Sai</option><option>Srikakulam</option><option>Tirupati</option><option>Visakhapatnam</option><option>Vizianagaram</option><option>West Godavari</option><option>YSR Kadapa</option></select></label><label>School name (optional)<input id="schoolName" maxlength="100" placeholder="Enter your school name"></label><label>Academic year<select id="academicYear"><option>2026–27</option><option>2025–26</option></select></label><div class="privacy-callout">We only store the profile details you choose to enter. Do not enter Aadhaar numbers, home addresses or other sensitive student information.</div><button id="saveSettings" class="primary-button" value="save">Save settings</button></form></dialog>
+  <dialog id="accountDialog" class="settings-dialog"><form method="dialog"><div class="dialog-head"><div><span class="section-kicker">ACCOUNT CONNECTION</span><h2>Connect your school account</h2></div><button class="close-button" aria-label="Close">×</button></div><p class="muted">Secure teacher and school accounts will be enabled when the Supabase project is connected. Until then, this prototype works locally on this device.</p><div class="privacy-callout">No student account or school record is uploaded in prototype mode.</div><button class="secondary-button" value="close">Close</button></form></dialog>
+  <footer class="app-footer"><span class="brand"><span class="brand-mark"><i></i><i></i><i></i></span><span>Swar<span>Vidya</span></span></span><span>Learn by speaking. Understand in your language.</span><a href="https://samagrashiksha.ap.gov.in/textBooksDownloadingPageTEBilingual" target="_blank" rel="noreferrer">Curriculum source ↗</a></footer>
+  <nav class="mobile-nav"><button class="active" data-view="learn"><span>⌂</span>Learn</button><button data-view="library"><span>▤</span>Library</button><button data-view="progress"><span>↗</span>Progress</button><button data-view="teacher"><span>♧</span>Teacher</button></nav>
+  <div id="toast" class="toast" role="status"></div>
+</div>
+<script type="module" src="/src/main.js"></script>
+</body></html>
