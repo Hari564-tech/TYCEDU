@@ -136,14 +136,14 @@ as $$ select exists(select 1 from public.classrooms c join public.classroom_memb
 create or replace function public.prevent_client_role_change()
 returns trigger language plpgsql
 set search_path = public
-as $
+as $$
 begin
   if new.role is distinct from old.role and current_user not in ('postgres','service_role','supabase_admin') then
     raise exception 'Role changes must be performed by a trusted administrator';
   end if;
   return new;
 end;
-$;
+$$;
 
 drop trigger if exists prevent_profile_role_change on public.profiles;
 create trigger prevent_profile_role_change before update on public.profiles
