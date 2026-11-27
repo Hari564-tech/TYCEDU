@@ -14,7 +14,7 @@ function mediumName(m){return ({te:"Telugu",en:"English",ur:"Urdu","te-en":"Telu
 function icon(s){return ({Mathematics:"∑",Science:"✳",Biology:"◉",Physics:"ϟ","Social Studies":"◎",English:"Aa",Telugu:"అ",Hindi:"अ",Urdu:"اردو","General Science":"✳"})[s]||"▤"}
 function card(b){return `<article class="book-card"><div class="book-icon">${icon(b.subject)}</div><div class="book-info"><span class="book-meta">CLASS ${b.grade} · ${esc(b.subject.toUpperCase())}</span><strong>${esc(b.title.replace(/^\d+_/,"").replaceAll("_"," "))}</strong><small>${esc(mediumName(b.medium))}${b.note?" · "+esc(b.note):""}</small><div class="book-links"><a href="${esc(b.downloadUrl)}" target="_blank" rel="noreferrer">Open official catalogue ↗</a><span>Chapter index pending</span></div></div></article>`}
 function setView(view){document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id==="view-"+view));document.querySelectorAll("[data-view]").forEach(v=>v.classList.toggle("active",v.dataset.view===view));window.scrollTo({top:0,behavior:"smooth"});if(view==="progress")renderProgress();if(view==="teacher")renderTeacher()}
-function renderControls(){$("classSelect").value=profile.grade;$("mediumSelect").value=profile.medium;$("voiceSelect").value=profile.voice;$("libraryClass").value=profile.grade;$("libraryMedium").value=profile.medium;$("displayName").value=profile.name;$("districtSelect").value=profile.district;$("schoolName").value=profile.school;$("academicYear").value=profile.year;$("accountLabel").textContent=session?.user?.email||profile.name||"My learning"}
+function renderControls(){$("classSelect").value=profile.grade;$("mediumSelect").value=profile.medium;$("voiceSelect").value=profile.voice;$("libraryClass").value=profile.grade;$("libraryMedium").value=profile.medium;$("displayName").value=profile.name;$("districtSelect").value=profile.district;$("schoolName").value=profile.school;$("academicYear").value=profile.year;$("accountLabel").textContent=session?.user?.email||profile.name||"My learning";if($("teacherSignOut"))$("teacherSignOut").classList.toggle("hidden",!session)}
 function renderSubjects(){
  const ids=[...new Set(books().map(b=>b.subject))];
  const palette={Mathematics:"lavender",Science:"mint",Biology:"mint",Physics:"blue","Social Studies":"peach",English:"blue",Telugu:"yellow",Hindi:"rose","General Science":"mint"};
@@ -76,13 +76,26 @@ async function initCloud(){
  const url=import.meta.env.VITE_SUPABASE_URL,key=import.meta.env.VITE_SUPABASE_ANON_KEY;if(!url||!key)return;
  try{const {createClient}=await import("@supabase/supabase-js");supabase=createClient(url,key);const result=await supabase.auth.getSession();session=result.data.session;supabase.auth.onAuthStateChange((_e,s)=>{session=s;renderControls();renderAll()});renderControls();renderAll()}catch(e){console.error(e);toast("School account connection unavailable. Local mode remains active.")}
 }
+async function teacherSignIn(){
+ if(!supabase){toast("Supabase is not configured yet. Add the project URL and anon key first.");return}
+ const email=$("staffEmail").value.trim();
+ if(!email){toast("Enter your school email address.");return}
+ const {error}=await supabase.auth.signInWithOtp({email,options:{emailRedirectTo:window.location.origin}});
+ if(error){toast(error.message);return}
+ toast("Secure sign-in link sent. Check your school email.");
+}
+async function teacherSignOut(){
+ if(!supabase)return;
+ const {error}=await supabase.auth.signOut();
+ if(error)toast(error.message);else toast("Signed out.");
+}
 function bind(){
  document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>setView(b.dataset.view)));
  $("classSelect").onchange=e=>{profile.grade=+e.target.value;save("profile",profile);$("libraryClass").value=profile.grade;renderAll()};
  $("mediumSelect").onchange=e=>{profile.medium=e.target.value;save("profile",profile);$("libraryMedium").value=profile.medium;renderAll()};
  $("voiceSelect").onchange=e=>{profile.voice=e.target.value;save("profile",profile)};
  ["libraryClass","libraryMedium","librarySubject"].forEach(id=>$(id).addEventListener("change",renderLibrary));
- $("settingsButton").onclick=()=>$("settingsDialog").showModal();$("accountButton").onclick=()=>$("accountDialog").showModal();
+ $("settingsButton").onclick=()=>$("settingsDialog").showModal();$("accountButton").onclick=()=>$("accountDialog").showModal();$("teacherSignIn").onclick=teacherSignIn;$("teacherSignOut").onclick=teacherSignOut;
  $("saveSettings").onclick=()=>{profile.name=$("displayName").value.trim();profile.district=$("districtSelect").value;profile.school=$("schoolName").value.trim();profile.year=$("academicYear").value;save("profile",profile);renderControls();toast("Learning settings saved.")};
  $("micButton").onclick=voice;$("askButton").onclick=ask;$("speakButton").onclick=speak;$("startPractice").onclick=startQuiz;$("nextQuiz").onclick=startQuiz;
  document.querySelectorAll("[data-question]").forEach(b=>b.onclick=()=>{$("questionInput").value=b.dataset.question;ask()});
