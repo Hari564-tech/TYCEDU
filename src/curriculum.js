@@ -6,7 +6,7 @@ const make = (grade, subject, title, medium, category, filename, note = "") => (
   grade, subject, title, medium, note,
   source: CURRICULUM_SOURCE,
   sourceUrl: TITLEWISE_CATALOGUE_URL,
-  downloadUrl: `https://samagrashiksha.ap.gov.in/downloadBooks/${encodeURIComponent(category)}/${encodeURIComponent(filename)}.pdf/${grade}`,
+  downloadUrl: TITLEWISE_CATALOGUE_URL,
   chapterStatus: "not-yet-extracted"
 });
 export const BOOKS = [
