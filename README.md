@@ -26,12 +26,15 @@ npm run dev
 
 Open the local Vite URL.
 
-Production build:
+Production build and source checks:
 
 ```bash
+npm run verify
 npm run build
 npm run preview
 ```
+
+The GitHub Actions workflow runs the verification checks before the Vite production build on pushes to `main` and pull requests.
 
 ## Environment variables
 
